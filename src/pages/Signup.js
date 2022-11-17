@@ -28,7 +28,7 @@ export default function Signup() {
     setLoading(true);
     try {
       await signup({
-        employeeId: payload.employee.value,
+        employeeId: payload.employeeId.value,
         name: payload.name.value,
         position: payload.position.value,
         password: payload.password.value,
