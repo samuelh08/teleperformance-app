@@ -20,6 +20,9 @@ export default function Event() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [days, setDays] = useState(0);
+  const [winnersDance, setWinnersDance] = useState([]);
+  const [winnersSing, setWinnersSing] = useState([]);
+  const [winnersDraw, setWinnersDraw] = useState([]);
 
   const loadData = useCallback(async () => {
     try {
@@ -31,6 +34,27 @@ export default function Event() {
       const daysToEvent =
         (eventDate.getTime() - actualDate.getTime()) / (1000 * 3600 * 24);
       setDays(daysToEvent);
+      const dance = [];
+      event.data.inscriptions.forEach((item) => {
+        if ((item.category === 'Dancing') & (item.place <= 10)) {
+          dance[item.place - 1] = item;
+        }
+      });
+      setWinnersDance(dance);
+      const sing = [];
+      event.data.inscriptions.forEach((item) => {
+        if ((item.category === 'Singing') & (item.place <= 10)) {
+          sing[item.place - 1] = item;
+        }
+      });
+      setWinnersSing(sing);
+      const draw = [];
+      event.data.inscriptions.forEach((item) => {
+        if ((item.category === 'Illustration') & (item.place <= 10)) {
+          draw[item.place - 1] = item;
+        }
+      });
+      setWinnersDraw(draw);
     } catch (error) {
       setError(error);
     } finally {
@@ -49,7 +73,7 @@ export default function Event() {
   return (
     <>
       {error && <Alert severity="error">{error}</Alert>}
-      <Typography variant="h2" margin="10px" color="#7A2180">
+      <Typography variant="h2" margin="10px" color="#7A2180" align="center">
         {data.date}
       </Typography>
       <Grid container>
@@ -80,7 +104,7 @@ export default function Event() {
                   Inscriptions to this event are closed
                 </Typography>
               )}
-              {user.position === 'Director' && (
+              {user?.position === 'Director' && (
                 <Button color="secondary" href={`/updateEvent/${id}`}>
                   Update this event
                 </Button>
@@ -100,9 +124,42 @@ export default function Event() {
               flexWrap: 'wrap',
             }}
           >
-            <Typography variant="h6">Singing</Typography>
-            <Typography variant="h6">Dancing</Typography>
-            <Typography variant="h6">Illustration</Typography>
+            <Box>
+              <Typography variant="h4">Singing</Typography>
+              {winnersSing.map((item, index) => (
+                <Typography
+                  variant={item.place <= 3 ? 'h5' : 'h6'}
+                  color={item.place <= 3 ? '#E40276' : 'black'}
+                  key={index}
+                >
+                  {index + 1}. {item.user.name}
+                </Typography>
+              ))}
+            </Box>
+            <Box>
+              <Typography variant="h4">Dancing</Typography>
+              {winnersDance.map((item, index) => (
+                <Typography
+                  variant={item.place <= 3 ? 'h5' : 'h6'}
+                  color={item.place <= 3 ? '#E40276' : 'black'}
+                  key={index}
+                >
+                  {index + 1}. {item.user.name}
+                </Typography>
+              ))}
+            </Box>
+            <Box>
+              <Typography variant="h4">Illustration</Typography>
+              {winnersDraw.map((item, index) => (
+                <Typography
+                  variant={item.place <= 3 ? 'h5' : 'h6'}
+                  color={item.place <= 3 ? '#E40276' : 'black'}
+                  key={index}
+                >
+                  {index + 1}. {item.user.name}
+                </Typography>
+              ))}
+            </Box>
           </Box>
         </Grid>
       </Grid>
