@@ -1,4 +1,4 @@
-import { Button, Grid, Link } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import React, { useContext } from 'react';
 
 import UserContext from '../context/user';
@@ -8,9 +8,9 @@ export default function BarUser() {
   return context?.user ? (
     <Grid container justifyContent="end" alignItems="baseline">
       <Grid item marginX={2}>
-        <Link href="/profile" color="inherit" underline="none">
+        <Typography color="inherit" variant="body">
           {context.user.name} | {context.user.position}
-        </Link>
+        </Typography>
       </Grid>
       <Grid item>
         <Button color="inherit" href="/logout">

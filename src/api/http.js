@@ -41,7 +41,7 @@ instance.interceptors.response.use(
       error.response.config.url !== '/login'
     ) {
       localStorage.removeItem('token');
-      document.location = '/logout';
+      //document.location = '/logout';
     }
 
     if (error.response?.data?.message) {

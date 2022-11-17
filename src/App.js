@@ -17,6 +17,7 @@ const Logout = React.lazy(() => import('./pages/Logout'));
 const CreateEvent = React.lazy(() => import('./pages/CreateEvent'));
 const Event = React.lazy(() => import('./pages/Event'));
 const UpdateEvent = React.lazy(() => import('./pages/UpdateEvent'));
+const Inscription = React.lazy(() => import('./pages/Inscription'));
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/createEvent" element={<CreateEvent />} />
           <Route path="/events/:id" element={<Event />} />
           <Route path="/updateEvent/:id" element={<UpdateEvent />} />
+          <Route path="/inscription/:id" element={<Inscription />} />
         </Routes>
         <Footer />
       </React.Suspense>
