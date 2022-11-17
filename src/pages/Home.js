@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {
   Alert,
   Button,
@@ -19,7 +19,7 @@ export default function Home() {
 
   const { user } = useContext(UserContext);
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     try {
       const events = await getEvents();
       setData(events.data);
@@ -28,11 +28,11 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [loadData]);
 
   if (loading) {
     return <CircularProgress color="inherit" />;

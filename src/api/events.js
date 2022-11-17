@@ -9,6 +9,15 @@ export function createEvent({ date }) {
   });
 }
 
+export function updateEvent({ id, date }) {
+  return http.put(`/events/${id}`, { date }).then((response) => {
+    const { data: json } = response;
+    return {
+      data: json.data,
+    };
+  });
+}
+
 export function getEvents() {
   return http.get('/events').then((response) => {
     const { data: json } = response;
@@ -22,7 +31,7 @@ export function getEvent(id) {
   return http.get(`/events/${id}`).then((response) => {
     const { data: json } = response;
     return {
-      data: json,
+      data: json.data,
     };
   });
 }

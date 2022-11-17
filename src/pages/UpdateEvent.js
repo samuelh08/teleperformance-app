@@ -8,11 +8,13 @@ import {
   Typography,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { createEvent } from '../api/events';
+import { updateEvent } from '../api/events';
 
 export default function CreateEvent() {
+  const params = useParams();
+  const { id = '' } = params;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -23,10 +25,11 @@ export default function CreateEvent() {
     const payload = event.target.elements;
     setLoading(true);
     try {
-      await createEvent({
+      await updateEvent({
+        id,
         date: payload.date.value,
       });
-      navigate('/');
+      navigate(`/events/${id}`);
     } catch (error) {
       setError(error);
     } finally {
@@ -40,7 +43,7 @@ export default function CreateEvent() {
       <Grid container minHeight="100vh">
         <Grid item xs={12} sm={6}>
           <Typography variant="h2" margin="10px" color="#7A2180">
-            New Event
+            Update Event
           </Typography>
           <Grid
             container
@@ -70,7 +73,7 @@ export default function CreateEvent() {
                 loading={loading}
                 color="secondary"
               >
-                Create
+                Update
               </LoadingButton>
             </Grid>
           </Grid>
