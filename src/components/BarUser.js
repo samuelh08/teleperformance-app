@@ -3,6 +3,9 @@ import React, { useContext } from 'react';
 
 import UserContext from '../context/user';
 
+// this component adds navigation to signup or login page to Navigation Bar
+// or user information if user is logged in
+
 export default function BarUser() {
   const context = useContext(UserContext);
   return context?.user ? (

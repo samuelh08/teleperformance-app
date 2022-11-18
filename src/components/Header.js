@@ -9,6 +9,9 @@ import {
 import React from 'react';
 import BarUser from './BarUser';
 
+// MUI Navigation bar with the name of the application, navigation to home page
+// navigation to login or signup page or user information if logged in
+
 export default function Header() {
   return (
     <AppBar position="sticky" color="secondary">

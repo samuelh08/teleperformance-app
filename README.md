@@ -1,3 +1,15 @@
+# Teleperformance App
+
+Aplication that manages events for Teleperformance.
+
+It consumes teleperformance-api.
+
+An employee can create an user with their information and the they can login with their ID and password (6 characters minimum), then they can register for any event if their position is 'Asesor', every event has 3 categories (Singing, Dancing, Illustration), if an authorized user tries to register twice to the same event, the Register form submission will be disabled. They can also create and update events if their position is 'Director'.
+
+On each event page, information about unauthorized attempts to register to the event and double attempts by authorized employees can be seen. Registration is forbidden when the event is closer than 3 days from the actual date.
+
+If you want to login to any of the pre-existing users, the password is 123456.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

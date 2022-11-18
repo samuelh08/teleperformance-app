@@ -24,6 +24,7 @@ export default function Event() {
   const [winnersSing, setWinnersSing] = useState([]);
   const [winnersDraw, setWinnersDraw] = useState([]);
 
+  // define function to load information as callback to avoid generating it each time
   const loadData = useCallback(async () => {
     try {
       setError(null);
@@ -31,9 +32,11 @@ export default function Event() {
       setData(event.data);
       const eventDate = new Date(event.data.date);
       const actualDate = new Date();
+      // calculate days from actual date to event day
       const daysToEvent =
         (eventDate.getTime() - actualDate.getTime()) / (1000 * 3600 * 24);
       setDays(daysToEvent);
+      // extract winners from each category of the event
       const dance = [];
       event.data.inscriptions.forEach((item) => {
         if ((item.category === 'Dancing') & (item.place <= 10)) {
@@ -56,16 +59,19 @@ export default function Event() {
       });
       setWinnersDraw(draw);
     } catch (error) {
+      // if there is an error its message will be shown as an alert on top
       setError(error);
     } finally {
       setLoading(false);
     }
   }, [id]);
 
+  // load data before page render
   useEffect(() => {
     loadData();
   }, [loadData]);
 
+  // show a loading animation when data is not ready to be shown
   if (loading) {
     return <CircularProgress color="inherit" />;
   }

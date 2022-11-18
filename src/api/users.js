@@ -1,5 +1,6 @@
 import http from './http';
 
+// Interaction with API to login with an existing user
 export function login({ employeeId, password }) {
   return http
     .post('/users/login', { employeeId, password })
@@ -17,6 +18,7 @@ export function login({ employeeId, password }) {
     });
 }
 
+// Interaction with API to create an user
 export function signup(payload) {
   return http.post('/users/signup', payload).then((response) => {
     const { data: json } = response;

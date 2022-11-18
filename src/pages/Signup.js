@@ -18,15 +18,20 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // define options for select fields
   const sexes = ['Female', 'Male'];
   const cities = ['Medellín', 'Bogotá'];
 
+  // Handler function to create user when Form is submited
   const handleSubmit = async (event) => {
+    // prevents automatic reloading of the page when form is submited
     event.preventDefault();
     setError(null);
+    // gets form values
     const payload = event.target.elements;
     setLoading(true);
     try {
+      // api call
       await signup({
         employeeId: payload.employeeId.value,
         name: payload.name.value,
@@ -39,6 +44,7 @@ export default function Signup() {
       });
       navigate('/login');
     } catch (error) {
+      // if there is an error its message will be shown as an alert on top
       setError(error);
     } finally {
       setLoading(false);

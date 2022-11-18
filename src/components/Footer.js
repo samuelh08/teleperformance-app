@@ -1,6 +1,8 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
+// Add developer name to the bottom of the page
+
 export default function Footer() {
   return (
     <Box

@@ -13,24 +13,30 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { updateEvent } from '../api/events';
 
 export default function CreateEvent() {
+  // get event id from params
   const params = useParams();
   const { id = '' } = params;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Handler function to update event when Form is submited
   const handleSubmit = async (event) => {
+    // prevents automatic reloading of the page when form is submited
     event.preventDefault();
     setError(null);
+    // gets form values
     const payload = event.target.elements;
     setLoading(true);
     try {
+      // api call
       await updateEvent({
         id,
         date: payload.date.value,
       });
       navigate(`/events/${id}`);
     } catch (error) {
+      // if there is an error its message will be shown as an alert on top
       setError(error);
     } finally {
       setLoading(false);

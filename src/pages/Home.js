@@ -16,9 +16,10 @@ export default function Home() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  // get logged user information from context
   const { user } = useContext(UserContext);
 
+  // define function to load information as callback to avoid generating it each time
   const loadData = useCallback(async () => {
     try {
       const events = await getEvents();
@@ -30,10 +31,12 @@ export default function Home() {
     }
   }, []);
 
+  // load data before page render
   useEffect(() => {
     loadData();
   }, [loadData]);
 
+  // show a loading animation when data is not ready to be shown
   if (loading) {
     return <CircularProgress color="inherit" />;
   }

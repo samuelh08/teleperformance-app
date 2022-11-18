@@ -17,17 +17,22 @@ export default function CreateEvent() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Handler function to create Event when Form is submited
   const handleSubmit = async (event) => {
+    // prevents automatic reloading of the page when form is submited
     event.preventDefault();
     setError(null);
+    // gets form values
     const payload = event.target.elements;
     setLoading(true);
     try {
+      // create event then go to home page
       await createEvent({
         date: payload.date.value,
       });
       navigate('/');
     } catch (error) {
+      // if there is an error its message will be shown as an alert on top
       setError(error);
     } finally {
       setLoading(false);

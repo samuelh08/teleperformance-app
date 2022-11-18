@@ -10,6 +10,7 @@ import { UserProvider } from './context/user';
 import Footer from './components/Footer';
 import Header from './components/Header';
 
+// load pages as components with lazy loading
 const Home = React.lazy(() => import('./pages/Home'));
 const Signup = React.lazy(() => import('./pages/Signup'));
 const Login = React.lazy(() => import('./pages/Login'));

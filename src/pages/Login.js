@@ -21,17 +21,22 @@ export default function Login() {
   const [error, setError] = useState(null);
 
   async function handleSubmit(event) {
+    // prevents automatic reloading of the page when form is submited
     event.preventDefault();
+    // gets form values
     const { employeeId, password } = event.target.elements;
     setLoading(true);
     try {
+      // api call
       const json = await login({
         employeeId: employeeId.value,
         password: password.value,
       });
+      // set logged user information to context
       context.setUser(json.data);
       navigate(`/`);
     } catch (error) {
+      // if there is an error its message will be shown as an alert on top
       setError(error);
     } finally {
       setLoading(false);
