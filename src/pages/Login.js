@@ -45,7 +45,7 @@ export default function Login() {
 
   return (
     <>
-      {error && <Alert severity="error">{error}</Alert>}
+      {error && <Alert severity="error">{error?.message || error}</Alert>}
 
       <Paper elevation={10} sx={{ margin: '100px auto', maxWidth: '330px' }}>
         <Grid container flexDirection="column" alignItems="center">

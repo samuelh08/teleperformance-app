@@ -53,7 +53,7 @@ export default function Signup() {
 
   return (
     <>
-      {error && <Alert severity="error">{error}</Alert>}
+      {error && <Alert severity="error">{error?.message || error}</Alert>}
       <Grid container minHeight="100vh">
         <Grid item xs={12} sm={6}>
           <Typography variant="h2" margin="10px" color="#7A2180">
